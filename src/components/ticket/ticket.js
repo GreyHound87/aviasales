@@ -2,11 +2,13 @@ import React from 'react'
 
 import styles from './ticket.module.scss'
 
-function Ticket() {
+function Ticket({ ticket }) {
+  const { price /* , segments */ } = ticket
+
   return (
     <li className={styles.ticket}>
       <h3 className={styles.price_logo}>
-        <span className={styles.price}> 13 400 Р </span>
+        <span className={styles.price}>{price} Р</span>
         {/* <img className={styles.logo} alt="logo" src= /> */}
       </h3>
 
