@@ -1,0 +1,7 @@
+.main {
+  grid-area: main;
+  display: grid;
+  gap: 20px;
+  grid-template-rows: 50px auto;
+  max-width: 500px;
+}

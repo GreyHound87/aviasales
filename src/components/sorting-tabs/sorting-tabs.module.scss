@@ -1,0 +1,39 @@
+.tabs {
+  display: grid;
+  grid-auto-flow: column;
+  margin: 0;
+}
+
+.tab {
+  display: flex;
+  border: 1px solid #dfe5ec;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  padding: 5px 0px 0px 0px;
+  width: 168px;
+
+  text-align: center;
+  font-family: Open Sans;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 600;
+
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+}
+
+.tab:first-child {
+  border-radius: 3px 0 0 3px;
+}
+
+.tab:last-child {
+  border-radius: 0 3px 3px 0;
+}
+
+.tab:hover {
+  cursor: pointer;
+  background: #2196f3;
+  border-color: #2196f3;
+  color: white;
+}

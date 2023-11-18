@@ -1,0 +1,15 @@
+.body {
+  display: grid;
+  gap: 20px;
+  max-width: 960px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 27px;
+  background-color: #f3f7fa;
+  min-height: 434px;
+  grid-template-areas:
+    'header header'
+    'sidebar main';
+  grid-template-rows: 130px 1fr;
+  grid-template-columns: 0.5fr 1fr;
+}
