@@ -3,6 +3,10 @@
 <!--
 
 src
+|-- helpers/
+|       |-- format-stops.js
+|       |-- format-duration.js
+|
 |-- redux/
 |   |-- actions.js
 |   |-- reducers.js
