@@ -1,7 +1,7 @@
-import React from 'react'
-import { Provider } from 'react-redux'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
-import store from '../../redux/store'
+import { fetchSearchId, fetchTickets } from '../../redux/slices/tickets-slice'
 import Header from '../header/header'
 import SideBar from '../side-bar/side-bar'
 import Main from '../main/main'
@@ -9,14 +9,26 @@ import Main from '../main/main'
 import styles from './aviasales-app.module.scss'
 
 function AviaSalesApp() {
+  const dispatch = useDispatch()
+  const searchId = useSelector((state) => state.tickets.searchId)
+  /*   const isLoading = useSelector((state) => state.tickets.isLoading)
+   */
+  useEffect(() => {
+    dispatch(fetchSearchId())
+  }, [dispatch])
+
+  useEffect(() => {
+    if (searchId) {
+      dispatch(fetchTickets(searchId))
+    }
+  }, [dispatch, searchId])
+
   return (
-    <Provider store={store}>
-      <section className={styles.body}>
-        <Header />
-        <SideBar />
-        <Main />
-      </section>
-    </Provider>
+    <section className={styles.body}>
+      <Header />
+      <SideBar />
+      <Main />
+    </section>
   )
 }
 

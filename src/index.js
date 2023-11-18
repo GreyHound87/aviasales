@@ -1,8 +1,14 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-
 import './index.css'
+import { Provider } from 'react-redux'
+
+import store from './redux/store'
 import AviaSalesApp from './components/aviasales-app/aviasales-app'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
-root.render(<AviaSalesApp />)
+root.render(
+  <Provider store={store}>
+    <AviaSalesApp />
+  </Provider>
+)

@@ -7,7 +7,9 @@ src
 |   |-- actions.js
 |   |-- reducers.js
 |   |-- slices/
-|   |   |-- sortingSlice.js
+|   |   |-- sorting-slice.js
+|   |   |-- tickets-slice.js
+|   |   |-- filters-slice.js
 |   |-- store.js
 |
 |-- components/
