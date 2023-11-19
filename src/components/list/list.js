@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
 
 import { applyFilters } from '../../redux/slices/filters-slice'
@@ -10,12 +10,12 @@ import styles from './list.module.scss'
 function List() {
   const dispatch = useDispatch()
   const tickets = useSelector((state) => state.tickets.tickets)
+  const filters = useSelector((state) => state.filters.filters)
   const [visibleTickets, setVisibleTickets] = useState(5)
-  /* const filters = useSelector((state) => state.filters) */
 
   useEffect(() => {
-    dispatch(applyFilters({ tickets }))
-  }, [dispatch, tickets])
+    dispatch(applyFilters({ tickets, filters }))
+  }, [dispatch, tickets, filters, visibleTickets])
 
   const filteredTickets = useSelector((state) => state.filters.filteredTickets)
   const displayedTickets = filteredTickets.slice(0, visibleTickets)

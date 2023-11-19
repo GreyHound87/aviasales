@@ -61,13 +61,21 @@ const filtersSlice = createSlice({
         return state
       }
 
-      const filteredTickets = tickets.filter(
-        (ticket) =>
-          (state.filters.all || !state.filters.nullTransfer || ticket.stops.length === 0) &&
-          (state.filters.all || !state.filters.oneTransfer || ticket.stops.length === 1) &&
-          (state.filters.all || !state.filters.twoTransfer || ticket.stops.length === 2) &&
-          (state.filters.all || !state.filters.threeTransfer || ticket.stops.length === 3)
-      )
+      const filteredTickets = tickets.filter((ticket) => {
+        const stopsOutbound = ticket.segments[0].stops.length
+        const stopsInbound = ticket.segments[1].stops.length
+
+        return (
+          state.filters.all ||
+          (state.filters.nullTransfer && stopsOutbound <= 0 && stopsInbound === 0) ||
+          state.filters.all ||
+          (state.filters.oneTransfer && stopsOutbound <= 1 && stopsInbound <= 1) ||
+          state.filters.all ||
+          (state.filters.twoTransfer && stopsOutbound <= 2 && stopsInbound <= 2) ||
+          state.filters.all ||
+          (state.filters.threeTransfer && stopsOutbound <= 3 && stopsInbound <= 3)
+        )
+      })
 
       return { ...state, filteredTickets }
     },
