@@ -56,6 +56,11 @@ const filtersSlice = createSlice({
     applyFilters: (state, action) => {
       const { tickets } = action.payload
 
+      if (!Array.isArray(tickets)) {
+        console.error('Tickets are not an array:', tickets)
+        return state
+      }
+
       const filteredTickets = tickets.filter(
         (ticket) =>
           (state.filters.all || !state.filters.nullTransfer || ticket.stops.length === 0) &&

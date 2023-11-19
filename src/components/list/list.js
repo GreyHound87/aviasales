@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector, useDispatch } from 'react-redux'
 import { v4 as uuidv4 } from 'uuid'
 
@@ -10,6 +10,7 @@ import styles from './list.module.scss'
 function List() {
   const dispatch = useDispatch()
   const tickets = useSelector((state) => state.tickets.tickets)
+  const [visibleTickets, setVisibleTickets] = useState(5)
   /* const filters = useSelector((state) => state.filters) */
 
   useEffect(() => {
@@ -17,17 +18,24 @@ function List() {
   }, [dispatch, tickets])
 
   const filteredTickets = useSelector((state) => state.filters.filteredTickets)
+  const displayedTickets = filteredTickets.slice(0, visibleTickets)
+
+  const handleShowMore = () => {
+    setVisibleTickets((prevVisibleTickets) => prevVisibleTickets + 5)
+  }
 
   return (
     <>
       <ul className={styles.ticket_list}>
-        {filteredTickets.map((ticket) => (
+        {displayedTickets.map((ticket) => (
           <Ticket key={uuidv4()} ticket={ticket} />
         ))}
       </ul>
-      <button type="button" className={styles.button}>
-        ПОКАЗАТЬ ЕЩЕ 5 БИЛЕТОВ!
-      </button>
+      {visibleTickets < filteredTickets.length && (
+        <button type="button" className={styles.button} onClick={handleShowMore}>
+          ПОКАЗАТЬ ЕЩЕ 5 БИЛЕТОВ!
+        </button>
+      )}
     </>
   )
 }
