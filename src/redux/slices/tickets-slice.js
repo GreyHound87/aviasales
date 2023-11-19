@@ -6,29 +6,33 @@ export const fetchSearchId = createAsyncThunk('tickets/fetchSearchId', async () 
   return data.searchId
 })
 
-export const fetchTickets = createAsyncThunk('tickets/fetchTickets', async (searchId, { getState, dispatch }) => {
-  try {
-    const fetchTicketsRecursive = async (receivedTickets = []) => {
+export const fetchTickets = createAsyncThunk('tickets/fetchTickets', async (searchId, { dispatch }) => {
+  const fetchTicketsRecursive = async (receivedTickets = []) => {
+    try {
       const response = await fetch(`https://aviasales-test-api.kata.academy/tickets?searchId=${searchId}`)
       const data = await response.json()
 
-      if (data.tickets.length > 0) {
+      if (Array.isArray(data.tickets)) {
         const updatedTickets = [...receivedTickets, ...data.tickets]
         dispatch(ticketsSlice.actions.updateTickets(updatedTickets))
+
         if (!data.stop) {
           return fetchTicketsRecursive(updatedTickets)
         }
+      } else {
+        console.error('Invalid tickets data format:', data.tickets)
       }
 
       return receivedTickets
-    }
+    } catch (error) {
+      console.error('Error fetching tickets:', error)
 
-    const updatedTickets = await fetchTicketsRecursive()
-    return updatedTickets
-  } catch (error) {
-    console.error('Error fetching tickets:', error)
-    throw error
+      return fetchTicketsRecursive(receivedTickets)
+    }
   }
+
+  const updatedTickets = await fetchTicketsRecursive()
+  return updatedTickets
 })
 
 const ticketsSlice = createSlice({
@@ -46,12 +50,20 @@ const ticketsSlice = createSlice({
     builder
       .addCase(fetchSearchId.fulfilled, (state, action) => ({ ...state, searchId: action.payload }))
       .addCase(fetchTickets.pending, (state) => ({ ...state, isLoading: true }))
-      .addCase(fetchTickets.fulfilled, (state, action) => ({
+      .addCase(fetchTickets.fulfilled, (state, action) => {
+        const newTickets = action.payload.tickets
+        const updatedTickets = Array.isArray(newTickets) ? [...state.tickets, ...newTickets] : state.tickets
+
+        return {
+          ...state,
+          tickets: updatedTickets,
+          isLoading: action.payload.stop,
+        }
+      })
+      .addCase(fetchTickets.rejected, (state, action) => ({
         ...state,
-        tickets: [...state.tickets, ...action.payload.tickets],
-        isLoading: !action.payload.stop,
+        error: action.error.message,
       }))
-      .addCase(fetchTickets.rejected, (state, action) => ({ ...state, error: action.error.message }))
   },
 })
 
