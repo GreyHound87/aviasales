@@ -14,7 +14,8 @@ function Main() {
     <main className={styles.main}>
       <SortingTabs />
       {/* <Spinner /> */}
-      {error ? <Message /> : <List />}
+      <List />
+      {error && <Message />}
     </main>
   )
 }
