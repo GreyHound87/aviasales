@@ -53,13 +53,6 @@ const ticketsSlice = createSlice({
       }))
       .addCase(fetchTickets.rejected, (state, action) => ({ ...state, error: action.error.message }))
   },
-  /* extraReducers: (builder) => {
-    builder
-      .addCase(fetchSearchId.fulfilled, (state, action) => ({ ...state, searchId: action.payload }))
-      .addCase(fetchTickets.pending, (state) => ({ ...state, isLoading: true }))
-      .addCase(fetchTickets.fulfilled, (state) => ({ ...state, isLoading: false }))
-      .addCase(fetchTickets.rejected, (state, action) => ({ ...state, error: action.error.message }))
-  }, */
 })
 
 export const { updateTickets } = ticketsSlice.actions
