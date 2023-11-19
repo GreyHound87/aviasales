@@ -1,4 +1,3 @@
-// Filter.js
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -8,7 +7,7 @@ import styles from './filter.module.scss'
 
 function Filter() {
   const dispatch = useDispatch()
-  const filters = useSelector((state) => state.filters)
+  const filters = useSelector((state) => state.filters.filters)
 
   const filterLabels = {
     all: 'Все',
