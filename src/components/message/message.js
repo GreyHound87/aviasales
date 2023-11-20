@@ -6,7 +6,7 @@ import styles from './message.module.scss'
 function Message() {
   const error = useSelector((state) => state.tickets.error)
 
-  return <div className={styles.errorMsg}>{error ? 'Что-то пошло не так.. Мы скоро все исправим' : null}</div>
+  return <div className={styles.message}>{error ? 'Что-то пошло не так.. Мы скоро все исправим' : null}</div>
 }
 
 export default Message

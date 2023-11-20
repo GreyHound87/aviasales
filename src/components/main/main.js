@@ -14,10 +14,9 @@ function Main() {
   return (
     <main className={styles.main}>
       <SortingTabs />
+      {error && <Message />}
       {isLoading && <Spinner />}
       <List />
-
-      {error && <Message />}
     </main>
   )
 }

@@ -44,11 +44,15 @@ function List() {
 
   return (
     <>
-      <ul className={styles.ticket_list}>
-        {displayedTickets.map((ticket) => (
-          <Ticket key={uuidv4()} ticket={ticket} />
-        ))}
-      </ul>
+      {displayedTickets.length > 0 ? (
+        <ul className={styles.ticket_list}>
+          {displayedTickets.map((ticket) => (
+            <Ticket key={uuidv4()} ticket={ticket} />
+          ))}
+        </ul>
+      ) : (
+        <p className={styles.message}>Рейсов, подходящих под заданные фильтры, не найдено</p>
+      )}
       {visibleTickets < filteredTickets.length && (
         <button type="button" className={styles.button} onClick={handleShowMore}>
           ПОКАЗАТЬ ЕЩЕ 5 БИЛЕТОВ!

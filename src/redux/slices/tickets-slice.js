@@ -8,27 +8,19 @@ export const fetchSearchId = createAsyncThunk('tickets/fetchSearchId', async () 
 
 export const fetchTickets = createAsyncThunk('tickets/fetchTickets', async (searchId, { dispatch }) => {
   const fetchTicketsRecursive = async (receivedTickets = []) => {
-    try {
-      const response = await fetch(`https://aviasales-test-api.kata.academy/tickets?searchId=${searchId}`)
-      const data = await response.json()
+    const response = await fetch(`https://aviasales-test-api.kata.academy/tickets?searchId=${searchId}`)
+    const data = await response.json()
 
-      if (Array.isArray(data.tickets)) {
-        const updatedTickets = [...receivedTickets, ...data.tickets]
-        dispatch(ticketsSlice.actions.updateTickets(updatedTickets))
+    if (Array.isArray(data.tickets)) {
+      const updatedTickets = [...receivedTickets, ...data.tickets]
+      dispatch(ticketsSlice.actions.updateTickets(updatedTickets))
 
-        if (!data.stop) {
-          return fetchTicketsRecursive(updatedTickets)
-        }
-      } else {
-        console.error('Invalid tickets data format:', data.tickets)
+      if (!data.stop) {
+        return fetchTicketsRecursive(updatedTickets)
       }
-
-      return receivedTickets
-    } catch (error) {
-      console.error('Error fetching tickets:', error)
-
-      return fetchTicketsRecursive(receivedTickets)
     }
+
+    return receivedTickets
   }
 
   const updatedTickets = await fetchTicketsRecursive()
@@ -62,6 +54,7 @@ const ticketsSlice = createSlice({
       })
       .addCase(fetchTickets.rejected, (state, action) => ({
         ...state,
+        isLoading: false,
         error: action.error.message,
       }))
   },
