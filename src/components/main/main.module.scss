@@ -5,3 +5,13 @@
   grid-template-rows: 50px auto;
   max-width: 500px;
 }
+
+@media (max-width: 820px) {
+  .main {
+    gap: 12px;
+    grid-template-rows: 50px auto;
+    max-width: calc(100% - 24px);
+    width: calc(100% - 24px);
+    margin: 0 auto;
+  }
+}

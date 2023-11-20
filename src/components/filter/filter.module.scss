@@ -6,7 +6,7 @@
   border: 0;
   background-color: #fff;
   border-radius: 5px;
-  box-shadow: 0 0 8px 4px rgba(150, 155, 159, 0.2);
+  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.1);
 }
 
 .filters {
@@ -59,8 +59,8 @@
 .text:before {
   content: '';
   font-size: 14px;
-  width: calc((5vw) / 2);
-  height: calc((5vw) / 2);
+  width: 20px;
+  height: 20px;
   max-width: 20px;
   max-height: 20px;
   min-width: 10px;
@@ -77,4 +77,49 @@
   content: '✔';
   color: #2196f3;
   border-color: #2196f3;
+}
+
+@media (max-width: 820px) {
+  .container {
+    max-width: calc(100% - 24px);
+    margin: 0 auto;
+    padding: 6px;
+  }
+
+  .filters {
+    display: grid;
+    gap: 6px;
+    grid-template-areas:
+      'title title title title title'
+      'all null one two three';
+    grid-template-columns: repeat(5, 1fr);
+    max-width: 100%;
+  }
+
+  .title {
+    margin: 0 auto 12px auto;
+    padding: 0;
+    grid-area: title;
+    font-size: 2.8125vw;
+  }
+
+  .checkbox {
+    margin: 0;
+  }
+
+  .label {
+    width: 100%;
+    font-size: 1.5625vw;
+    justify-content: center;
+  }
+
+  .text {
+    flex-direction: column;
+    justify-content: center;
+    letter-spacing: 0.4px;
+  }
+
+  .text:before {
+    margin: 6px auto;
+  }
 }

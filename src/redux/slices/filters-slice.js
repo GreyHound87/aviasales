@@ -57,7 +57,6 @@ const filtersSlice = createSlice({
       const { tickets } = action.payload
 
       if (!Array.isArray(tickets)) {
-        console.error('Tickets are not an array:', tickets)
         return state
       }
 

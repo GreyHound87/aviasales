@@ -11,8 +11,7 @@ import styles from './aviasales-app.module.scss'
 function AviaSalesApp() {
   const dispatch = useDispatch()
   const searchId = useSelector((state) => state.tickets.searchId)
-  /*   const isLoading = useSelector((state) => state.tickets.isLoading)
-   */
+
   useEffect(() => {
     dispatch(fetchSearchId())
   }, [dispatch])

@@ -21,8 +21,6 @@ function Filter() {
     dispatch(setFilter({ filterName, value: !filters[filterName] }))
   }
 
-  console.log('Current Filters:', filters)
-
   return (
     <form className={styles.container}>
       <fieldset className={styles.filters}>

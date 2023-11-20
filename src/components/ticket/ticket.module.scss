@@ -4,6 +4,8 @@
   background-color: white;
   height: 184px;
   padding: 20px 2px 20px 20px;
+  box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
 }
 
 .price_logo {
@@ -24,10 +26,9 @@
 
 .logo {
   margin-left: auto;
+  margin-right: 18px;
   object-fit: cover;
-  width: calc((100vw - 320px) / 2);
-  max-width: 99px;
-  min-width: 60px;
+  width: 110px;
 }
 
 .information {
@@ -53,4 +54,35 @@
   font-weight: 600;
   letter-spacing: 0.5px;
   text-transform: uppercase;
+}
+
+@media (max-width: 820px) {
+  .ticket {
+    gap: 6px;
+    height: auto;
+  }
+
+  .price {
+    font-size: 5.625vw;
+  }
+
+  .text {
+    margin-left: 1px;
+    color: #4a4a4a;
+    font-family: Open Sans;
+    font-size: 3.4375vw;
+    font-style: normal;
+    font-weight: 600;
+  }
+  .gray_text {
+    color: #a0b0b9;
+    margin-bottom: 3px;
+    color: #a0b0b9;
+    font-family: Open Sans;
+    font-size: 2.8125vw;
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+  }
 }
