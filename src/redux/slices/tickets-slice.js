@@ -8,19 +8,23 @@ export const fetchSearchId = createAsyncThunk('tickets/fetchSearchId', async () 
 
 export const fetchTickets = createAsyncThunk('tickets/fetchTickets', async (searchId, { dispatch }) => {
   const fetchTicketsRecursive = async (receivedTickets = []) => {
-    const response = await fetch(`https://aviasales-test-api.kata.academy/tickets?searchId=${searchId}`)
-    const data = await response.json()
+    try {
+      const response = await fetch(`https://aviasales-test-api.kata.academy/tickets?searchId=${searchId}`)
+      const data = await response.json()
 
-    if (Array.isArray(data.tickets)) {
-      const updatedTickets = [...receivedTickets, ...data.tickets]
-      dispatch(ticketsSlice.actions.updateTickets(updatedTickets))
+      if (Array.isArray(data.tickets)) {
+        const updatedTickets = [...receivedTickets, ...data.tickets]
+        dispatch(ticketsSlice.actions.updateTickets(updatedTickets))
 
-      if (!data.stop) {
-        return fetchTicketsRecursive(updatedTickets)
+        if (!data.stop) {
+          return fetchTicketsRecursive(updatedTickets)
+        }
       }
-    }
 
-    return receivedTickets
+      return receivedTickets
+    } catch (error) {
+      return fetchTicketsRecursive(receivedTickets)
+    }
   }
 
   const updatedTickets = await fetchTicketsRecursive()
@@ -34,9 +38,11 @@ const ticketsSlice = createSlice({
     tickets: [],
     isLoading: false,
     error: null,
+    errors: [],
   },
   reducers: {
     updateTickets: (state, action) => ({ ...state, tickets: action.payload }),
+    addError: (state, action) => ({ ...state, errors: [...state.errors, action.payload] }),
   },
   extraReducers: (builder) => {
     builder
@@ -56,6 +62,7 @@ const ticketsSlice = createSlice({
         ...state,
         isLoading: false,
         error: action.error.message,
+        errors: [...state.errors, action.error.message],
       }))
   },
 })

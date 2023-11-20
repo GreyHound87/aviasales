@@ -25,7 +25,7 @@ function Ticket({ ticket }) {
     <li className={styles.ticket}>
       <h3 className={styles.price_logo}>
         <span className={styles.price}>{price} Р</span>
-        <img className={styles.logo} alt="logo" src={`http://pics.avs.io/160/40/${carrier}.png`} />
+        <img className={styles.logo} alt="logo" src={`https://pics.avs.io/160/40/${carrier}.png`} />
       </h3>
 
       {segments.map((segment) => (
