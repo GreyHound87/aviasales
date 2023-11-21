@@ -1,4 +1,4 @@
-[Visit Aviasales App](https://aviasales-cxga30yfr-sergeis-projects-125bc965.vercel.app/)
+[Visit Aviasales App](https://aviasales-me4kz7az2-sergeis-projects-125bc965.vercel.app/)
 
 <!--
 
