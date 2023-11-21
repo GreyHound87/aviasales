@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
+import { v4 as uuidv4 } from 'uuid'
 
 export const fetchSearchId = createAsyncThunk('tickets/fetchSearchId', async () => {
   const response = await fetch('https://aviasales-test-api.kata.academy/search')
@@ -13,7 +14,8 @@ export const fetchTickets = createAsyncThunk('tickets/fetchTickets', async (sear
       const data = await response.json()
 
       if (Array.isArray(data.tickets)) {
-        const updatedTickets = [...receivedTickets, ...data.tickets]
+        const orderedTickets = data.tickets.map((ticket) => ({ ...ticket, id: uuidv4() }))
+        const updatedTickets = [...receivedTickets, ...orderedTickets]
         dispatch(ticketsSlice.actions.updateTickets(updatedTickets))
 
         if (!data.stop) {

@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useMemo } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { v4 as uuidv4 } from 'uuid'
 
 import { applyFilters } from '../../redux/slices/filters-slice'
 import Ticket from '../ticket/ticket'
@@ -47,8 +46,8 @@ function List() {
       {displayedTickets.length > 0 ? (
         <ul className={styles.ticket_list}>
           {displayedTickets.map((ticket) => (
-            <li className={styles.ticket}>
-              <Ticket key={uuidv4()} ticket={ticket} />
+            <li key={ticket.id} className={styles.ticket}>
+              <Ticket ticket={ticket} />
             </li>
           ))}
         </ul>
