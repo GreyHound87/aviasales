@@ -1,5 +1,7 @@
 [Visit Aviasales App](https://aviasales-cxga30yfr-sergeis-projects-125bc965.vercel.app/)
 
+<!--
+
 Структура каталогов:
 
 src
@@ -60,3 +62,4 @@ src
 |
 |-- index.js
 |-- index.module.scss
+ -->
