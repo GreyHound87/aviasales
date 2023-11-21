@@ -22,7 +22,7 @@ function Ticket({ ticket }) {
   const { carrier, price, segments } = ticket
 
   return (
-    <li className={styles.ticket}>
+    <>
       <h3 className={styles.price_logo}>
         <span className={styles.price}>{price} Р</span>
         <img className={styles.logo} alt="logo" src={`https://pics.avs.io/160/40/${carrier}.png`} />
@@ -41,7 +41,7 @@ function Ticket({ ticket }) {
           <span className={styles.text}>{segment.stops.join(', ')}</span>
         </p>
       ))}
-    </li>
+    </>
   )
 }
 

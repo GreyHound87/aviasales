@@ -47,7 +47,9 @@ function List() {
       {displayedTickets.length > 0 ? (
         <ul className={styles.ticket_list}>
           {displayedTickets.map((ticket) => (
-            <Ticket key={uuidv4()} ticket={ticket} />
+            <li className={styles.ticket}>
+              <Ticket key={uuidv4()} ticket={ticket} />
+            </li>
           ))}
         </ul>
       ) : (
